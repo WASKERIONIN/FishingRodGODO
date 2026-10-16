@@ -1,0 +1,49 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://FishingRod.tscn" id="1_rod"]
+
+[sub_resource type="Environment" id="Environment_sky"]
+background_mode = 1
+background_color = Color(0.36, 0.55, 0.72, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat_ground"]
+albedo_color = Color(0.24, 0.31, 0.25, 1)
+metallic = 0.0
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+material = SubResource("mat_ground")
+size = Vector2(30, 30)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hint"]
+font_size = 18
+font_color = Color(1, 1, 1, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 0.6)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sky")
+
+[node name="SunLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.882948, -0.369949, 0.289036, 0, 0.615661, 0.788011, -0.469472, -0.695772, 0.543597, 0, 3, 0)
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="FishingRod" parent="." instance=ExtResource("1_rod")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999931, -0.00483595, 0.0107239, 0, 0.911597, 0.411084, -0.0117639, -0.411056, 0.911534, 1.05, 1.25, 2.55)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Hint" type="Label" parent="UI"]
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 460.0
+offset_bottom = 78.0
+text = "ЛКМ — заброс (cast)   |   ПКМ — подсечка (reel)"
+label_settings = SubResource("LabelSettings_hint")

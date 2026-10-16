@@ -1,0 +1,11 @@
+; Файл конфигурации проекта Godot.
+; Лучше править его через редактор (Project → Project Settings), а не вручную.
+
+config_version=5
+
+[application]
+
+config/name="FishingRodGODO"
+config/description="3D-удочка из примитивов Godot: заброс, подсечка, покой"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.7", "Forward Plus")

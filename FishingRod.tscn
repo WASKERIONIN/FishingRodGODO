@@ -1,0 +1,284 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FishingRod.gd" id="1_rod"]
+
+[sub_resource type="StandardMaterial3D" id="mat_metal"]
+albedo_color = Color(0.62, 0.66, 0.72, 1)
+metallic = 0.85
+roughness = 0.28
+
+[sub_resource type="StandardMaterial3D" id="mat_rod"]
+albedo_color = Color(0.13, 0.11, 0.1, 1)
+metallic = 0.35
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="mat_grip"]
+albedo_color = Color(0.09, 0.09, 0.1, 1)
+metallic = 0.0
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_float"]
+albedo_color = Color(0.85, 0.13, 0.1, 1)
+metallic = 0.0
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="mat_line"]
+albedo_color = Color(0.85, 0.88, 0.8, 1)
+metallic = 0.0
+roughness = 0.8
+
+[sub_resource type="CylinderMesh" id="grip_mesh"]
+material = SubResource("mat_grip")
+top_radius = 0.045
+bottom_radius = 0.052
+height = 0.34
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="butt_mesh"]
+material = SubResource("mat_rod")
+top_radius = 0.026
+bottom_radius = 0.034
+height = 0.62
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="mid_mesh"]
+material = SubResource("mat_rod")
+top_radius = 0.015
+bottom_radius = 0.024
+height = 0.6
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="tip_mesh"]
+material = SubResource("mat_rod")
+top_radius = 0.004
+bottom_radius = 0.014
+height = 1.0
+radial_segments = 12
+
+[sub_resource type="TorusMesh" id="ring_mesh"]
+material = SubResource("mat_metal")
+inner_radius = 0.028
+outer_radius = 0.05
+rings = 14
+ring_segments = 8
+
+[sub_resource type="CylinderMesh" id="ring_stub_mesh"]
+material = SubResource("mat_metal")
+top_radius = 0.006
+bottom_radius = 0.007
+height = 0.055
+radial_segments = 8
+
+[sub_resource type="CylinderMesh" id="float_line_mesh"]
+material = SubResource("mat_line")
+top_radius = 0.0035
+bottom_radius = 0.0035
+height = 0.45
+radial_segments = 6
+
+[sub_resource type="SphereMesh" id="float_ball_mesh"]
+material = SubResource("mat_float")
+radius = 0.055
+height = 0.11
+radial_segments = 16
+rings = 8
+
+[sub_resource type="BoxMesh" id="reel_foot_mesh"]
+material = SubResource("mat_metal")
+size = Vector3(0.06, 0.135, 0.035)
+
+[sub_resource type="CylinderMesh" id="reel_body_mesh"]
+material = SubResource("mat_metal")
+top_radius = 0.078
+bottom_radius = 0.078
+height = 0.055
+radial_segments = 24
+
+[sub_resource type="BoxMesh" id="reel_handle_mesh"]
+material = SubResource("mat_grip")
+size = Vector3(0.08, 0.015, 0.015)
+
+[sub_resource type="SphereMesh" id="reel_knob_mesh"]
+material = SubResource("mat_grip")
+radius = 0.016
+height = 0.032
+radial_segments = 12
+rings = 6
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "idle"
+length = 2
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.0871557, 0.996195, 0.5, 1, 0, 0, 0.101056, 0.994881, 1, 1, 0, 0, 0.0915016, 0.995805, 1.5, 1, 0, 0, 0.0732382, 0.997314, 2, 1, 0, 0, 0.0871557, 0.996195)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rod/Whip")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 0, -0.0157073, 0.999877, 1, 1, 0, 0, -0.00523596, 0.999986, 1.5, 1, 0, 0, 0.0165799, 0.999863, 2, 1, 0, 0, 0, 1)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rod/Whip/Float")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1.6, -0.45, 0, 0.5, 1, 1.6, -0.472, 0, 1, 1, 1.6, -0.456, 0, 1.5, 1, 1.6, -0.432, 0, 2, 1, 1.6, -0.45, 0)
+
+[sub_resource type="Animation" id="Animation_cast"]
+resource_name = "cast"
+length = 1
+loop_mode = 0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.0871557, 0.996195, 0.15, 1, 0, 0, 0.165048, 0.986286, 0.3, 1, 0, 0, 0.292372, 0.956305, 0.39, 1, 0, 0, 0.052336, 0.99863, 0.48, 1, 0, 0, -0.224951, 0.97437, 0.54, 1, 0, 0, -0.156434, 0.987688, 0.6, 1, 0, 0, -0.0697565, 0.997564, 0.8, 1, 0, 0, 0.0261769, 0.999657, 1, 1, 0, 0, 0.0871557, 0.996195)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rod/Whip")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.18, 1, 0, 0, -0.0784591, 0.996917, 0.35, 1, 0, 0, -0.147809, 0.989016, 0.42, 1, 0, 0, 0.0348995, 0.999391, 0.5, 1, 0, 0, 0.224951, 0.97437, 0.56, 1, 0, 0, 0.104528, 0.994522, 0.64, 1, 0, 0, -0.0610485, 0.998135, 0.82, 1, 0, 0, 0.0174524, 0.999848, 1, 1, 0, 0, 0, 1)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rod/Whip/Float")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1.6, -0.45, 0, 0.4, 1, 1.6, -0.478, 0, 0.62, 1, 1.6, -0.428, 0, 1, 1, 1.6, -0.45, 0)
+
+[sub_resource type="Animation" id="Animation_reel"]
+resource_name = "reel"
+length = 0.3
+loop_mode = 0
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0.0871557, 0.996195, 0.02, 1, 0, 0, 0.165048, 0.986286, 0.04, 1, 0, 0, 0.267238, 0.96363, 0.07, 1, 0, 0, 0.130526, 0.991445, 0.1, 1, 0, 0, -0.052336, 0.99863, 0.13, 1, 0, 0, 0.0261769, 0.999657, 0.16, 1, 0, 0, 0.121869, 0.992546, 0.22, 1, 0, 0, 0.104528, 0.994522, 0.3, 1, 0, 0, 0.0871557, 0.996195)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rod/Whip")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.03, 1, 0, 0, -0.104528, 0.994522, 0.06, 1, 0, 0, 0.147809, 0.989016, 0.1, 1, 0, 0, -0.0784591, 0.996917, 0.14, 1, 0, 0, 0.0610485, 0.998135, 0.2, 1, 0, 0, -0.0261769, 0.999657, 0.3, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rod/Reel/Wheel")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.06, 1, 0, 0, 0.515038, 0.857167, 0.12, 1, 0, 0, 0.961262, 0.275637, 0.18, 1, 0, 0, 0.887011, -0.461749, 0.24, 1, 0, 0, 0.422618, -0.906308, 0.3, 1, 0, 0, 0, -1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rod"]
+_data = {
+&"idle": SubResource("Animation_idle"),
+&"cast": SubResource("Animation_cast"),
+&"reel": SubResource("Animation_reel")
+}
+
+[node name="FishingRod" type="Node3D"]
+script = ExtResource("1_rod")
+
+[node name="Rod" type="Node3D" parent="."]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Grip" type="MeshInstance3D" parent="Rod"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, -0.17, 0, 0)
+mesh = SubResource("grip_mesh")
+
+[node name="Butt" type="MeshInstance3D" parent="Rod"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.31, 0, 0)
+mesh = SubResource("butt_mesh")
+
+[node name="Whip" type="Node3D" parent="Rod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62, 0, 0)
+
+[node name="Mid" type="MeshInstance3D" parent="Rod/Whip"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.3, 0, 0)
+mesh = SubResource("mid_mesh")
+
+[node name="Tip" type="MeshInstance3D" parent="Rod/Whip"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 1.1, 0, 0)
+mesh = SubResource("tip_mesh")
+
+[node name="Ring1" type="Node3D" parent="Rod/Whip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.05, 0)
+
+[node name="Ring1Mesh" type="MeshInstance3D" parent="Rod/Whip/Ring1"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("ring_mesh")
+
+[node name="Ring1Stub" type="MeshInstance3D" parent="Rod/Whip/Ring1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0275, 0)
+mesh = SubResource("ring_stub_mesh")
+
+[node name="Ring2" type="Node3D" parent="Rod/Whip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.05, 0)
+
+[node name="Ring2Mesh" type="MeshInstance3D" parent="Rod/Whip/Ring2"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("ring_mesh")
+
+[node name="Ring2Stub" type="MeshInstance3D" parent="Rod/Whip/Ring2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0275, 0)
+mesh = SubResource("ring_stub_mesh")
+
+[node name="Ring3" type="Node3D" parent="Rod/Whip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.05, 0)
+
+[node name="Ring3Mesh" type="MeshInstance3D" parent="Rod/Whip/Ring3"]
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("ring_mesh")
+
+[node name="Ring3Stub" type="MeshInstance3D" parent="Rod/Whip/Ring3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0275, 0)
+mesh = SubResource("ring_stub_mesh")
+
+[node name="Float" type="Node3D" parent="Rod/Whip"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.45, 0)
+
+[node name="FloatLine" type="MeshInstance3D" parent="Rod/Whip/Float"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225, 0)
+mesh = SubResource("float_line_mesh")
+
+[node name="FloatBall" type="MeshInstance3D" parent="Rod/Whip/Float"]
+mesh = SubResource("float_ball_mesh")
+
+[node name="Reel" type="Node3D" parent="Rod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.135, 0)
+
+[node name="ReelFoot" type="MeshInstance3D" parent="Rod/Reel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0675, 0)
+mesh = SubResource("reel_foot_mesh")
+
+[node name="Wheel" type="Node3D" parent="Rod/Reel"]
+
+[node name="ReelBody" type="MeshInstance3D" parent="Rod/Reel/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+mesh = SubResource("reel_body_mesh")
+
+[node name="ReelHandle" type="MeshInstance3D" parent="Rod/Reel/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048, 0, 0.035)
+mesh = SubResource("reel_handle_mesh")
+
+[node name="ReelKnob" type="MeshInstance3D" parent="Rod/Reel/Wheel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.088, 0, 0.035)
+mesh = SubResource("reel_knob_mesh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("..")
+libraries/ = SubResource("AnimationLibrary_rod")
